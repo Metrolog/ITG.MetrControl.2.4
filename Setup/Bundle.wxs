@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix
+	xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+>
+
+	<?include "$(var.Metrcontrol.ProjectDir)\Metrcontrol.wxi" ?>
+
+	<!--<Product
+	Id="$(var.ProductCode)"
+	Name="$(var.Manufacturer) $(var.ProductName)"
+	Version="$(var.ProductVersion)"
+	Language="1049"
+	Manufacturer="$(var.Manufacturer)"
+	UpgradeCode="$(var.UpgradeCode)"
+	>
+		<Package
+			InstallerVersion="500"
+			AdminImage="$(var.IsAdminImage)"
+			Compressed="$(var.Compressed)"
+			Manufacturer="IT-Service"
+			ShortNames="no"
+			Description="!(loc.PackageDescription) $(var.ProductName)."
+			Comments="!(loc.PackageDescription) $(var.ProductName)."
+			Keywords="Installer, $(var.ProductShortName)"
+			SummaryCodepage="!(loc.CodePage)"
+		/>-->
+
+
+	<Bundle
+		Name="$(var.ProductName)"
+		Version="$(var.ProductVersion)"
+		Manufacturer="$(var.Manufacturer)"
+		UpgradeCode="cbc80ebb-96c6-487c-ba49-9654f9bfc3d2"
+		AboutUrl="https://github.com/Metrolog/ITG.MetrControl.2.4"
+		Compressed="$(var.Compressed)"
+		UpdateUrl="https://github.com/Metrolog/ITG.MetrControl.2.4/releases"
+	>
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+			<bal:WixStandardBootstrapperApplication
+				LicenseUrl="https://github.com/Metrolog/ITG.MetrControl.2.4"
+        ShowVersion="yes"
+      />
+		</BootstrapperApplicationRef>
+
+		<Chain>
+			<MsiPackage
+				SourceFile="$(var.Metrcontrol.TargetPath)"
+				Compressed="$(var.Compressed)"
+				Vital="yes"
+			/>
+		</Chain>
+	</Bundle>
+</Wix>
