@@ -71,6 +71,7 @@
 ###############################################################################
 # Options for other files
 ###############################################################################
-*.md         merge=text   eol=lf
-*.mk         merge=text   eol=crlf
-Makefile     merge=text diff        -eol
+#*.md        merge=text   eol=lf
+*.md         merge=text   diff=text   -eol
+*.mk         merge=text   diff=text   eol=crlf
+Makefile     merge=text   diff        -eol
