@@ -43,6 +43,7 @@
     </GetVersion>
 		<Message Text="FullSemVer is $(GitVersion_FullSemVer)"/>
 		<PropertyGroup>
+	    <GitVersion_PreReleaseNumber Condition="$(GitVersion_PreReleaseNumber) == ''">0</GitVersion_PreReleaseNumber>
 			<GitVersionDefinitions>
 				GitVersion_Major=$(GitVersion_Major);
 				GITVERSION_MAJOR=$(GitVersion_Major);

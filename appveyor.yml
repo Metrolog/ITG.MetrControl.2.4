@@ -32,6 +32,23 @@ test_script:
   - cmd: make test --keep-going
 
 before_deploy:
+  #- ps: >-
+  #    & GitReleaseNotes . /OutputFile ReleaseNotes.md;
+  #    ${env:release_description} = ( Get-Content -LiteralPath ReleaseNotes.md -Encoding UTF8 ) -join "`n";
   - ps: >-
-      & GitReleaseNotes . /OutputFile ReleaseNotes.md;
-      ${env:release_description} = ( Get-Content -LiteralPath ReleaseNotes.md -Encoding UTF8 ) -join "`n";
+      [Console]::OutputEncoding = [System.Text.Encoding]::UTF8;
+      ${env:release_description} = ( `
+          ( `
+            git log --format=%B -n 1 `
+          ) -split "`n" `
+          | Select-Object -Skip 2 `
+      ) -join "`n";
+
+deploy:
+  - provider: Environment
+    name: GitHub-Releases
+    description: $(release_description)
+    artifact: msi
+    on:
+      branch: master
+      appveyor_repo_tag: false
